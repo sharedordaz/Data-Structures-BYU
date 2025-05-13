@@ -28,16 +28,34 @@ public static class Arrays
 
     /// <summary>
     /// Rotate the 'data' to the right by the 'amount'.  For example, if the data is 
-    /// List<int>{1, 2, 3, 4, 5, 6, 7, 8, 9} and an amount is 3 then the list after the function runs should be 
-    /// List<int>{7, 8, 9, 1, 2, 3, 4, 5, 6}.  The value of amount will be in the range of 1 to data.Count, inclusive.
+    /// List<int>{1, 2, 3, 4, 5, 6, 7, 8, 9} and amount is 3 then the list after the function runs should be 
+    /// List<int>{7, 8, 9, 1, 2, 3, 4, 5, 6}.
     ///
     /// Because a list is dynamic, this function will modify the existing data list rather than returning a new list.
     /// </summary>
+    /// <returns>Nothing</returns>
     public static void RotateListRight(List<int> data, int amount)
     {
-        // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // PLAN:
+        // Step 1: Identify the last 'amount' elements in the list.
+        //         These are the elements that will move to the front.
+        //         Use GetRange(startIndex, count) where startIndex = data.Count - amount
+        // Step 2: Remove those last 'amount' elements from the end of the list.
+        //         Use RemoveRange(startIndex, count)
+        // Step 3: Insert the previously saved elements at the beginning of the list.
+        //         Use InsertRange(0, elementsToMove)
+        // Step 4: The original list 'data' is now modified to reflect the rotation.
+
+        // Step 1
+        List<int> tail = data.GetRange(data.Count - amount, amount);
+
+        // Step 2
+        data.RemoveRange(data.Count - amount, amount);
+
+        // Step 3
+        data.InsertRange(0, tail);
     }
+
 }
+
+
