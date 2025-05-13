@@ -1,6 +1,7 @@
 public static class Arrays
 {
-    /// <summary>
+
+ /// <summary>
     /// This function will produce an array of size 'length' starting with 'number' followed by multiples of 'number'.  For 
     /// example, MultiplesOf(7, 5) will result in: {7, 14, 21, 28, 35}.  Assume that length is a positive
     /// integer greater than 0.
@@ -8,12 +9,21 @@ public static class Arrays
     /// <returns>array of doubles that are the multiples of the supplied number</returns>
     public static double[] MultiplesOf(double number, int length)
     {
-        // TODO Problem 1 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
+        // PLAN:
+        // Step 1: Create a new array of type double with size equal to 'length'
+        // Step 2: Use a for loop that goes from 0 to length - 1
+        // Step 3: For each index i in the loop, set the value of the array at that index to (number * (i + 1))
+        //         This is because the first multiple is number * 1, not number * 0
+        // Step 4: After the loop, return the array
 
-        return []; // replace this return statement with your own
+        double[] multiples = new double[length]; // Step 1
+
+        for (int i = 0; i < length; i++) // Step 2
+        {
+            multiples[i] = number * (i + 1); // Step 3
+        }
+
+        return multiples; // Step 4
     }
 
     /// <summary>
