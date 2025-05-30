@@ -26,7 +26,8 @@
         var highPriorityIndex = 0;
         for (int index = 1; index < _queue.Count; index++) //Fix the loop to include each element of the queue
         {
-            if (_queue[index].Priority >= _queue[highPriorityIndex].Priority)
+            if (_queue[index].Priority > _queue[highPriorityIndex].Priority ||
+            (_queue[index].Priority == _queue[highPriorityIndex].Priority && index > highPriorityIndex))
                 highPriorityIndex = index;
         }
 
