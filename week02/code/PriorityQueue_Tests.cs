@@ -36,10 +36,36 @@ public class PriorityQueueTests
 
 
     // Add more test cases as needed below.
-public void TestPriorityQueue_EmptyDequeue()
+    public void TestPriorityQueue_EmptyDequeue()
+    {
+        var queue = new PriorityQueue();
+        Assert.ThrowsException<InvalidOperationException>(() => queue.Dequeue());
+    }
+
+    [TestMethod]
+    public void TestPriorityQueue_MultipleSamePriority()
+    {
+        var queue = new PriorityQueue();
+        queue.Enqueue("A", 5);
+        queue.Enqueue("B", 5);
+        queue.Enqueue("C", 5);
+
+        // "C" should be dequeued first, then "B", then "A"
+        Assert.AreEqual("C", queue.Dequeue());
+        Assert.AreEqual("B", queue.Dequeue());
+        Assert.AreEqual("A", queue.Dequeue());
+    }
+
+[TestMethod]
+public void TestPriorityQueue_ToString()
 {
     var queue = new PriorityQueue();
-    Assert.ThrowsException<InvalidOperationException>(() => queue.Dequeue());
+    queue.Enqueue("A", 3);
+    queue.Enqueue("B", 1);
+    queue.Enqueue("C", 2);
+
+    // Check the string representation of the queue
+    Assert.AreEqual("[A (Pri:3), B (Pri:1), C (Pri:2)]", queue.ToString());
 }
 
 }
