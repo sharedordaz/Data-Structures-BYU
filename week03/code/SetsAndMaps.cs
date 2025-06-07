@@ -107,11 +107,45 @@ public static Dictionary<string, int> SummarizeDegrees(string filename)
     /// Reminder: You can access a letter by index in a string by 
     /// using the [] notation.
     /// </summary>
-    public static bool IsAnagram(string word1, string word2)
+public static bool IsAnagram(string word1, string word2)
+{
+    // Remove spaces and convert to lowercase
+    word1 = new string(word1.Where(char.IsLetterOrDigit).ToArray()).ToLower();
+    word2 = new string(word2.Where(char.IsLetterOrDigit).ToArray()).ToLower();
+
+    // If lengths are not equal, they cannot be anagrams
+    if (word1.Length != word2.Length)
     {
-        // TODO Problem 3 - ADD YOUR CODE HERE
         return false;
     }
+
+    // Create a dictionary to count character frequencies for word1
+    var charCount = new Dictionary<char, int>();
+    foreach (var c in word1)
+    {
+        if (charCount.ContainsKey(c))
+        {
+            charCount[c]++;
+        }
+        else
+        {
+            charCount[c] = 1;
+        }
+    }
+
+    // Decrement character counts using word2
+    foreach (var c in word2)
+    {
+        if (!charCount.ContainsKey(c) || charCount[c] == 0)
+        {
+            return false;
+        }
+        charCount[c]--;
+    }
+
+    // If all counts are zero, the words are anagrams
+    return charCount.Values.All(count => count == 0);
+}
 
     /// <summary>
     /// This function will read JSON (Javascript Object Notation) data from the 
