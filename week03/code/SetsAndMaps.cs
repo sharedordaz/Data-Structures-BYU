@@ -61,17 +61,35 @@ public static class SetsAndMaps
     /// </summary>
     /// <param name="filename">The name of the file to read</param>
     /// <returns>fixed array of divisors</returns>
-    public static Dictionary<string, int> SummarizeDegrees(string filename)
+public static Dictionary<string, int> SummarizeDegrees(string filename)
+{
+    var degrees = new Dictionary<string, int>();
+
+    foreach (var line in File.ReadLines(filename))
     {
-        var degrees = new Dictionary<string, int>();
-        foreach (var line in File.ReadLines(filename))
+        var fields = line.Split(",");
+
+        // Ensure the line has at least 4 columns
+        if (fields.Length < 4)
         {
-            var fields = line.Split(",");
-            // TODO Problem 2 - ADD YOUR CODE HERE
+            continue;
         }
 
-        return degrees;
+        var degree = fields[3].Trim();
+
+        // Increment the count for the degree in the dictionary
+        if (degrees.ContainsKey(degree))
+        {
+            degrees[degree]++;
+        }
+        else
+        {
+            degrees[degree] = 1;
+        }
     }
+
+    return degrees;
+}
 
     /// <summary>
     /// Determine if 'word1' and 'word2' are anagrams.  An anagram
