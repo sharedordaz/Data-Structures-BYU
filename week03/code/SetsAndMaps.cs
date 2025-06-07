@@ -20,10 +20,35 @@ public static class SetsAndMaps
     /// </summary>
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
     public static string[] FindPairs(string[] words)
+{
+    var result = new List<string>();
+    var seen = new HashSet<string>();
+
+    foreach (var word in words)
     {
-        // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        // Skip words with identical characters (e.g., "aa")
+        if (word[0] == word[1])
+        {
+            continue;
+        }
+
+        // Reverse the word to check for its pair
+        var reversed = new string(new[] { word[1], word[0] });
+
+        // If the reversed word is already in the set, we found a pair
+        if (seen.Contains(reversed))
+        {
+            result.Add($"{reversed} & {word}");
+        }
+        else
+        {
+            // Otherwise, add the current word to the set
+            seen.Add(word);
+        }
     }
+
+    return result.ToArray();
+}
 
     /// <summary>
     /// Read a census file and summarize the degrees (education)
