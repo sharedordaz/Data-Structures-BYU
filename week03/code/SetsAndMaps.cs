@@ -173,11 +173,11 @@ public static bool IsAnagram(string word1, string word2)
 
         var featureCollection = JsonSerializer.Deserialize<FeatureCollection>(json, options);
 
-        // TODO Problem 5:
-        // 1. Add code in FeatureCollection.cs to describe the JSON using classes and properties 
-        // on those classes so that the call to Deserialize above works properly.
-        // 2. Add code below to create a string out each place a earthquake has happened today and its magitude.
-        // 3. Return an array of these string descriptions.
-        return [];
+         var result = featureCollection.Features
+        .Where(f => f.Properties.Mag.HasValue && !string.IsNullOrEmpty(f.Properties.Place))
+        .Select(f => $"{f.Properties.Place} - Mag {f.Properties.Mag.Value}")
+        .ToArray();
+
+        return result;
     }
 }
