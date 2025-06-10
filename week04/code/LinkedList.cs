@@ -134,7 +134,35 @@ public void InsertTail(int value)
     /// </summary>
     public void Remove(int value)
     {
-        // TODO Problem 3
+    // Start searching from the head
+    Node? curr = _head;
+
+    while (curr is not null)
+    {
+        if (curr.Data == value)
+        {
+            // If the node to remove is the head
+            if (curr == _head)
+            {
+                RemoveHead();
+            }
+            // If the node to remove is the tail
+            else if (curr == _tail)
+            {
+                RemoveTail();
+            }
+            // If the node is in the middle
+            else
+            {
+                curr.Prev!.Next = curr.Next; // Connect the previous node to the next node
+                curr.Next!.Prev = curr.Prev; // Connect the next node to the previous node
+            }
+
+            return; // Exit after removing the node
+        }
+
+            curr = curr.Next; // Move to the next node
+        }
     }
 
     /// <summary>
