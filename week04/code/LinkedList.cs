@@ -79,7 +79,18 @@ public void InsertTail(int value)
     /// </summary>
     public void RemoveTail()
     {
-        // TODO Problem 2
+    // If the list has only one item or is empty, set head and tail to null
+    if (_head == _tail)
+    {
+        _head = null;
+        _tail = null;
+    }
+    // If the list has more than one item, only the tail will be affected
+    else if (_tail is not null)
+    {
+        _tail.Prev!.Next = null; // Disconnect the second-to-last node from the tail
+        _tail = _tail.Prev; // Update the tail to point to the second-to-last node
+    }
     }
 
     /// <summary>
