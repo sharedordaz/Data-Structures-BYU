@@ -169,8 +169,21 @@ public void InsertTail(int value)
     /// Search for all instances of 'oldValue' and replace the value to 'newValue'.
     /// </summary>
     public void Replace(int oldValue, int newValue)
-    {
-        // TODO Problem 4
+        {
+        // Start searching from the head
+        Node? curr = _head;
+
+        while (curr is not null)
+        {
+        // If the current node's data matches oldValue, replace it with newValue
+        if (curr.Data == oldValue)
+        {
+            curr.Data = newValue;
+        }
+
+        // Move to the next node
+        curr = curr.Next;
+        }
     }
 
     /// <summary>
