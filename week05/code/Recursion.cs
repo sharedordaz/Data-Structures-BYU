@@ -141,7 +141,19 @@ public static class Recursion
     /// </summary>
     public static void WildcardBinary(string pattern, List<string> results)
     {
-        // TODO Start Problem 4
+    // Find the index of the first wildcard
+    int wildcardIndex = pattern.IndexOf('*');
+
+    // Base case: if no wildcard exists, add the pattern to results
+    if (wildcardIndex == -1)
+    {
+        results.Add(pattern);
+        return;
+    }
+
+    // Recursive case: replace the wildcard with '0' and '1'
+    WildcardBinary(pattern.Substring(0, wildcardIndex) + "0" + pattern.Substring(wildcardIndex + 1), results);
+    WildcardBinary(pattern.Substring(0, wildcardIndex) + "1" + pattern.Substring(wildcardIndex + 1), results);
     }
 
     /// <summary>
