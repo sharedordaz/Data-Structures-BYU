@@ -14,8 +14,12 @@ public static class Recursion
     /// </summary>
     public static int SumSquaresRecursive(int n)
     {
-        // TODO Start Problem 1
+    // Base case: if n <= 0, return 0
+    if (n <= 0)
         return 0;
+
+    // Recursive case: n^2 + SumSquaresRecursive(n-1)
+    return n * n + SumSquaresRecursive(n - 1);
     }
 
     /// <summary>
