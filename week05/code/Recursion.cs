@@ -43,7 +43,19 @@ public static class Recursion
     /// </summary>
     public static void PermutationsChoose(List<string> results, string letters, int size, string word = "")
     {
-        // TODO Start Problem 2
+    // Base case: if the word length equals the desired size, add it to results
+    if (word.Length == size)
+    {
+        results.Add(word);
+        return;
+    }
+
+    // Recursive case: iterate through each letter and build permutations
+    foreach (char letter in letters)
+    {
+        // Remove the current letter from the remaining letters and add it to the word
+        PermutationsChoose(results, letters.Replace(letter.ToString(), ""), size, word + letter);
+    }
     }
 
     /// <summary>
