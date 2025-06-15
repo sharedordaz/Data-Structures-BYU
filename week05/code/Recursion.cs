@@ -162,17 +162,32 @@ public static class Recursion
     /// </summary>
     public static void SolveMaze(List<string> results, Maze maze, int x = 0, int y = 0, List<ValueTuple<int, int>>? currPath = null)
     {
-        // If this is the first time running the function, then we need
-        // to initialize the currPath list.
-        if (currPath == null) {
-            currPath = new List<ValueTuple<int, int>>();
+    // Initialize the current path if null
+    if (currPath == null)
+        currPath = new List<ValueTuple<int, int>>();
+
+    // Add the current position to the path
+    currPath.Add((x, y));
+
+    // Base case: if the current position is the end, add the path to results
+    if (maze.IsEnd(x, y))
+    {
+        results.Add(currPath.AsString());
+        return;
+    }
+
+    // Recursive case: explore all valid moves (up, down, left, right)
+    foreach (var (dx, dy) in new[] { (0, -1), (0, 1), (-1, 0), (1, 0) })
+    {
+        int newX = x + dx;
+        int newY = y + dy;
+
+        if (maze.IsValidMove(currPath, newX, newY))
+        {
+            // Create a copy of the current path for recursion
+            var newPath = new List<ValueTuple<int, int>>(currPath);
+            SolveMaze(results, maze, newX, newY, newPath);
         }
-        
-        // currPath.Add((1,2)); // Use this syntax to add to the current path
-
-        // TODO Start Problem 5
-        // ADD CODE HERE
-
-        // results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
+    }
     }
 }
