@@ -11,8 +11,13 @@ public class Node
 
     public void Insert(int value)
     {
-        // TODO Start Problem 1
-
+        // Start Problem 1
+        // Check if the value is less than the current node's data
+        if (value == Data)
+        {
+            // Value already exists in the tree, do not insert duplicates
+            return;
+        }
         if (value < Data)
         {
             // Insert to the left
@@ -33,8 +38,26 @@ public class Node
 
     public bool Contains(int value)
     {
-        // TODO Start Problem 2
-        return false;
+        // Check if the current node contains the value
+    if (value == Data)
+    {
+        return true;
+    }
+
+    // Recursively search in the left subtree if the value is less than the current node's data
+    if (value < Data && Left is not null)
+    {
+        return Left.Contains(value);
+    }
+
+    // Recursively search in the right subtree if the value is greater than the current node's data
+    if (value > Data && Right is not null)
+    {
+        return Right.Contains(value);
+    }
+
+    // If the value is not found in the current node or its subtrees
+    return false;
     }
 
     public int GetHeight()
