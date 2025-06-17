@@ -60,9 +60,13 @@ public class Node
     return false;
     }
 
-    public int GetHeight()
-    {
-        // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
-    }
+public int GetHeight()
+{
+    // Recursively calculate the height of the left and right subtrees
+    int leftHeight = Left?.GetHeight() ?? 0;
+    int rightHeight = Right?.GetHeight() ?? 0;
+
+    // The height of the current node is 1 plus the maximum height of its subtrees
+    return 1 + Math.Max(leftHeight, rightHeight);
+}
 }
